@@ -1,0 +1,3 @@
+textos/text_copy.txt
+textos/mastextos/mas_text_copy.txt
+textos/text_copy_copy.txt

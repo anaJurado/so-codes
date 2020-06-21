@@ -1,0 +1,6 @@
+.//text.txt
+.//dir1/dir2/dir2_text_copy.txt
+.//dir1/dir1_text_copy.txt
+.//textos/text_copy.txt
+.//textos/mastextos/mas_text_copy.txt
+.//textos/text_copy_copy.txt
