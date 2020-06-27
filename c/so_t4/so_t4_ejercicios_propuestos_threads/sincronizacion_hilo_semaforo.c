@@ -20,10 +20,17 @@ void *th_func1(void *arg) {
 
 	printf("Soy el hilo 1\n");
 
-	printf("Esto se tiene que imprimir primero\n");
+	printf("1.- Esto se tiene que imprimir primero \n");
 
 	// Una veza que ya he hecho lo que quería aquí, mando la señal de post al semaforo
 	sem_post(&sem);
+
+
+	sem_wait(&sem);
+	printf("3.- Y esto se tiene que imprimir después DEL DESPUÉS\n");
+	sem_post(&sem);
+
+
 
 	pthread_exit(0);
 
@@ -41,7 +48,13 @@ void *th_func2(void *arg) {
 	sem_wait(&sem);
 
 	// Cuando llegue la señal de POST al semáforo esto se levantará y se imprimirá el mensaje
-	printf("Y esto se tiene que imprimir después\n");	
+	printf("2.- Y esto se tiene que imprimir después\n");	
+
+	sem_post(&sem);
+
+	sem_wait(&sem);
+
+	printf("4.- Y por último se imprime esto\n");
 
 	pthread_exit(0);
 
@@ -76,3 +89,5 @@ int main(){
 	
 	return 0;
 }
+
+//gcc orden.c -o orden -lpthread
