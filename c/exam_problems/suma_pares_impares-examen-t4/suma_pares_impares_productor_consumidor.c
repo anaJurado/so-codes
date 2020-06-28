@@ -18,7 +18,8 @@ int buffer[BUFF_SIZE]; 			// buffer circular compartido *
 int suma_pares, suma_impares; 	// Guardaremos aquí los resultados de la suma
 
 pthread_mutex_t mutex; 			// Acceso a sección crítica 
-pthread_cond_t hay_hueco, hay_dato, dato_negativo; 	// Condiciones de espera 
+pthread_cond_t hay_hueco, hay_dato
+; 	// Condiciones de espera 
 
 
 void *suma(void *arg);
