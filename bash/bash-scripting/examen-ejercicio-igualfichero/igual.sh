@@ -4,6 +4,11 @@ echo "##  IGUAL.SH  ##"
 echo "################"
 echo ""
 
+# igual.sh fichero salida [directorio]
+# Este script deberá buscar archivos de forma recursiva (FIND) en un directorio (el que se le pasa o DIR por defecto) 
+# que sean iguales en contenido ()
+# el resultado de la comparación se ha de escribir en el fichero salida
+
 #Numero argumentos es 2 o 3
 if [ $# -lt 2 ] || [ $# -gt 3 ] 
 then
@@ -29,16 +34,16 @@ fi
 # Recorro recursivamente todo los ficheros y directorios a partir de $DIR
 for FD in ` find $DIR `
 do 	
-	# Si FD es in fichero entonces calculo la diferencia con el que me ha pasado
+	# Si FD es un fichero entonces calculo la diferencia con el que me ha pasado
 	if [ -f $FD ] 
 	then
-		DIFFERENT=` diff $1 $FD `
+		DIFFERENT=` diff $1 $FD ` # El comando DIFF sólo devuelve algo cuando encuentra diferencias
 		# Si no existe diferencia significa que son iguales
 		if [ ! $DIFFERENT ]
 		then
 			# Guardamos el fichero con el que no hemos encontrado diferencias
 			# Importante hacerlo con >> porque como es un FOR 
-			# cada vez que lo abras para escribir no quiere machacarlo!!!
+			# cada vez que lo abras para escribir no quieres machacarlo!!!
 			echo $FD >> $2
 		fi
 	fi
