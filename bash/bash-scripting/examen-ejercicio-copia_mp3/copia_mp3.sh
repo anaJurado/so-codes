@@ -32,15 +32,16 @@ else
 	DIR=$2
 fi
 
+# Se puede hacer de las dos formas!
 
-FILES=` find $1 -name "*.mp3" `
-for FILE in $FILES
-do
-	cp $FILE $DIR
-done
+# FILES=` find $1 -name "*.mp3" `
+# for FILE in $FILES
+# do
+# 	cp $FILE $DIR
+# done
 
 
 for FIL in ` find $1 -name "*.mp3" `
 do
-	cp $FILE $DIR
+	cp $FIL $DIR
 done

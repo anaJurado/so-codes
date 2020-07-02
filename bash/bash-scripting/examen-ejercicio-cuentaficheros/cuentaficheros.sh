@@ -4,10 +4,11 @@ echo "##  CUENTAFICHERO.SH  ##"
 echo "#######################"
 echo ""
  
-# A partir de un directorio que se le pasa como parámetro cuent el numero de ficheros (que no de directorios)
-# los ficheros han de tener permiso de ejcucion para el propio usuario
+# A partir de un directorio que se le pasa como parámetro cuenta el numero de ficheros (que no de directorios)
+# los ficheros han de tener permiso de ejecucion para el propio usuario
 
 # CONTROLAR NUMERO DE PARÁMETROS
+# Sólo debemos pasarle un parámetro (directorio a partir del cual buscar)
 if test $# -gt 1 
 then
 	echo "ERROR. Wrong number of parameters"
@@ -15,6 +16,7 @@ then
 fi
 
 # CONTROLAR TIPO DE PARAMETROS
+# El parámetro que se le pasa ha de ser de tipo directorio
 if test $# -eq 1 
 then
 	if test -d $1
@@ -31,13 +33,16 @@ fi
 # CONTAR CUANTOS FICHEROS TIENEN PERMISO DE EJECUCION PARA EL USUARIO 
 # EN EL SUBARBOL DE DIRECTORIOS A PARTIR DEL QUE NOS PASAN O EN EL QUE ESTAMOS
 
+# Hacemos búsqueda recursiva (ficheros y directorios) a partir del que tenemos
 FILEDIR=` find $DIR `
 CONTADOR=0
 for FD in $FILEDIR
 do
-	FILE=` ls -l $FD `
-	PERM=` echo $FILE | head -c 10 `
-	if [[ $PERM =~ [-]{1}[rw]{2}[x] ]]
+	FILE=` ls -l $FD ` 						# Nos da los permisos de ese fichero en particular: -rwxr--r--@ 1 ana  staff  1549 Jun 18 21:41 cuentaficheros.sh
+	PERM=` echo $FILE | head -c 10 ` 		# Me quedo con los 10 primeros caractereres de la línea
+	if [[ $PERM =~ [-]{1}..[x] ]] 			# 1º char debe ser un -
+											# 2º y 3º nos da igual si son r,w o - (usamos . para indical cualquier caracter)
+											# 4º ha de ser una x
 	then
 		CONTADOR=` echo $(($CONTADOR + 1)) `
 		echo $FILE
