@@ -46,9 +46,11 @@ int main(int argc, char **argv) {
 		// Tenemos el FILE * con el descriptor del pipe
 		fd = fdopen(pipe_des[1], "w"); 
 
-		// Añadimos al fichero el string 
-		fprintf(fd,"Hola hijo");
-		
+		// Añadimos al fichero el string  (funciona con ambos, fprintf, fputs)
+		//fprintf(fd,"Hola hijo");
+		fputs("Hola hijo", fd);
+
+
 		// Actualiza el estado del stream (en nuestro caso el fichero) con lo que haya cambiado en entrada/salida
 		fflush(fd);
 		
